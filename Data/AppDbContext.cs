@@ -40,31 +40,41 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<Mdparking>(entity =>
         {
             entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDParking__Activ__3B75D760");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDParking_CreatedBy");
             entity.Property(e => e.Frecuency).HasDefaultValue("N", "DF__MDParking__Frecu__3C69FB99");
             entity.Property(e => e.Sii).HasDefaultValue(false, "DF__MDParking__SII__3A81B327");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDParking_UpdatedBy");
         });
 
         modelBuilder.Entity<MdparkingStatus>(entity =>
         {
             entity.Property(e => e.Active).HasDefaultValue(true, "DF_MDParkingStatus_Active");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDParkingStatus_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDParkingStatus_UpdatedBy");
         });
 
         modelBuilder.Entity<Mdrol>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDRol__active__3F466844");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDRol_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDRol_UpdatedBy");
         });
 
         modelBuilder.Entity<Mduser>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDUser__active__45F365D3");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDUser_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDUser_UpdatedBy");
         });
 
         modelBuilder.Entity<MduserRol>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDUserRol__activ__48CFD27E");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDUserRol_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDUserRol_UpdatedBy");
 
             entity.HasOne(d => d.Rol).WithMany(p => p.MduserRols).HasConstraintName("FK_MDUserRol_MDRol");
 
@@ -75,6 +85,8 @@ public partial class AppDbContext : DbContext
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Active).HasDefaultValue(true, "DF_TRImportProcess_Active");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_TRImportProcess_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_TRImportProcess_UpdatedBy");
 
             entity.HasOne(d => d.IdpkNavigation).WithMany(p => p.TrimportProcesses).HasConstraintName("FK_TRImportProcess_MDParking");
         });
@@ -83,6 +95,8 @@ public partial class AppDbContext : DbContext
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Active).HasDefaultValue(true, "DF_TRProcessError_Active");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_TRProcessError_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_TRProcessError_UpdatedBy");
         });
 
         modelBuilder.Entity<VoccupationActual>(entity =>
