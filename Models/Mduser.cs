@@ -15,9 +15,11 @@ public partial class Mduser
 
     public bool Active { get; set; }
 
-    public Guid? CreatedBy { get; set; }
+    [StringLength(50)]
+    public string? CreatedBy { get; set; }
 
-    public Guid? UpdatedBy { get; set; }
+    [StringLength(50)]
+    public string? UpdatedBy { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? Created { get; set; }

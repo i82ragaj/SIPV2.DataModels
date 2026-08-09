@@ -14,9 +14,11 @@ public partial class MduserRol
 
     public bool Active { get; set; }
 
-    public int? CreatedBy { get; set; }
+    [StringLength(50)]
+    public string? CreatedBy { get; set; }
 
-    public int? UpdatedBy { get; set; }
+    [StringLength(50)]
+    public string? UpdatedBy { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? Created { get; set; }
