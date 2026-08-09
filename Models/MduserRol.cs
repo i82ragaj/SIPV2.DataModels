@@ -10,28 +10,22 @@ namespace SIPV2.DataModels;
 public partial class MduserRol
 {
     [Key]
-    [Column("id")]
     public Guid Id { get; set; }
 
-    [Column("active")]
     public bool Active { get; set; }
 
-    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
-    [Column("updatedBy")]
     public int? UpdatedBy { get; set; }
 
-    [Column("created", TypeName = "datetime")]
+    [Column(TypeName = "datetime")]
     public DateTime? Created { get; set; }
 
-    [Column("updated", TypeName = "datetime")]
+    [Column(TypeName = "datetime")]
     public DateTime? Updated { get; set; }
 
-    [Column("userId")]
     public Guid? UserId { get; set; }
 
-    [Column("rolId")]
     public Guid? RolId { get; set; }
 
     [ForeignKey("RolId")]

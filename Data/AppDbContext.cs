@@ -13,6 +13,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Mdparking> Mdparkings { get; set; }
 
+    public virtual DbSet<MdparkingStatus> MdparkingStatuses { get; set; }
+
     public virtual DbSet<Mdrol> Mdrols { get; set; }
 
     public virtual DbSet<Mduser> Mdusers { get; set; }
@@ -37,10 +39,14 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder.Entity<Mdparking>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ALLParki__3214EC279C67C035");
+            entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDParking__Activ__3B75D760");
+            entity.Property(e => e.Frecuency).HasDefaultValue("N", "DF__MDParking__Frecu__3C69FB99");
+            entity.Property(e => e.Sii).HasDefaultValue(false, "DF__MDParking__SII__3A81B327");
+        });
 
-            entity.Property(e => e.Active).HasDefaultValue(true);
-            entity.Property(e => e.Frecuency).HasDefaultValue("N");
+        modelBuilder.Entity<MdparkingStatus>(entity =>
+        {
+            entity.Property(e => e.Active).HasDefaultValue(true, "DF_MDParkingStatus_Active");
         });
 
         modelBuilder.Entity<Mdrol>(entity =>
@@ -68,6 +74,7 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<TrimportProcess>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Active).HasDefaultValue(true, "DF_TRImportProcess_Active");
 
             entity.HasOne(d => d.IdpkNavigation).WithMany(p => p.TrimportProcesses).HasConstraintName("FK_TRImportProcess_MDParking");
         });
@@ -75,7 +82,7 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<TrprocessError>(entity =>
         {
             entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.ErrorId).ValueGeneratedOnAdd();
+            entity.Property(e => e.Active).HasDefaultValue(true, "DF_TRProcessError_Active");
         });
 
         modelBuilder.Entity<VoccupationActual>(entity =>

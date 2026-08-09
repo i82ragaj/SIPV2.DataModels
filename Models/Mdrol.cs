@@ -10,28 +10,22 @@ namespace SIPV2.DataModels;
 public partial class Mdrol
 {
     [Key]
-    [Column("id")]
     public Guid Id { get; set; }
 
-    [Column("active")]
     public bool Active { get; set; }
 
-    [Column("createdBy")]
     public int? CreatedBy { get; set; }
 
-    [Column("updatedBy")]
     public int? UpdatedBy { get; set; }
 
-    [Column("created", TypeName = "datetime")]
+    [Column(TypeName = "datetime")]
     public DateTime? Created { get; set; }
 
-    [Column("updated", TypeName = "datetime")]
+    [Column(TypeName = "datetime")]
     public DateTime? Updated { get; set; }
 
-    [Column("name")]
     public string? Name { get; set; }
 
-    [Column("description")]
     public string? Description { get; set; }
 
     [InverseProperty("Rol")]

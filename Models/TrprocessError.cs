@@ -14,13 +14,24 @@ public partial class TrprocessError
     [Column("ID")]
     public Guid Id { get; set; }
 
+    public bool? Active { get; set; }
+
+    [StringLength(50)]
+    public string? CreatedBy { get; set; }
+
+    [StringLength(50)]
+    public string? UpdatedBy { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? Created { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? Updated { get; set; }
+
     [Column("IDPK")]
     [StringLength(10)]
     [Unicode(false)]
     public string? Idpk { get; set; }
-
-    [Column("ErrorID")]
-    public int ErrorId { get; set; }
 
     [StringLength(100)]
     [Unicode(false)]

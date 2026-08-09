@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SIPV2.DataModels;
 
-[Table("TRImportProcess")]
-public partial class TrimportProcess
+[Table("MDParkingStatus")]
+public partial class MdparkingStatus
 {
     [Key]
     [Column("ID")]
-    public Guid Id { get; set; }
+    [StringLength(10)]
+    [Unicode(false)]
+    public string Id { get; set; } = null!;
 
     public bool Active { get; set; }
 
@@ -27,26 +29,22 @@ public partial class TrimportProcess
     [Column(TypeName = "datetime")]
     public DateTime? Updated { get; set; }
 
-    [Column("IDPK")]
-    [StringLength(10)]
-    [Unicode(false)]
-    public string? Idpk { get; set; }
-
     [Column(TypeName = "datetime")]
-    public DateTime? Begin { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime? End { get; set; }
-
-    public TimeOnly? Duration { get; set; }
+    public DateTime? LastImported { get; set; }
 
     [StringLength(20)]
     [Unicode(false)]
-    public string? Status { get; set; }
+    public string? LastImportedStatus { get; set; }
 
-    public string? Description { get; set; }
+    [Column("LastImportedOK", TypeName = "datetime")]
+    public DateTime? LastImportedOk { get; set; }
 
-    [ForeignKey("Idpk")]
-    [InverseProperty("TrimportProcesses")]
-    public virtual Mdparking? IdpkNavigation { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? LastCountTotals { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? LastCountTotalsStatus { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? LastImportedDuration { get; set; }
 }
