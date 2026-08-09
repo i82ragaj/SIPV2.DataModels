@@ -9,17 +9,17 @@ namespace SIPV2.DataModels;
 [Keyless]
 public partial class VoccupationActual
 {
-    [Column("ID")]
+    [Column("CounterID")]
     [StringLength(51)]
     [Unicode(false)]
-    public string Id { get; set; } = null!;
+    public string CounterId { get; set; } = null!;
 
     [StringLength(10)]
     [Unicode(false)]
-    public string ParkingCode { get; set; } = null!;
+    public string ParkingId { get; set; } = null!;
 
     [StringLength(100)]
-    public string ParkingName { get; set; } = null!;
+    public string? ParkingName { get; set; }
 
     [StringLength(40)]
     [Unicode(false)]
@@ -30,7 +30,7 @@ public partial class VoccupationActual
 
     [StringLength(10)]
     [Unicode(false)]
-    public string? ControlSystem { get; set; }
+    public string ControlSystem { get; set; } = null!;
 
     public short? Capacity { get; set; }
 
