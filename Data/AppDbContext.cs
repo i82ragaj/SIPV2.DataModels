@@ -11,6 +11,8 @@ public partial class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<MdcounterConfig> MdcounterConfigs { get; set; }
+
     public virtual DbSet<Mdparking> Mdparkings { get; set; }
 
     public virtual DbSet<MdparkingStatus> MdparkingStatuses { get; set; }
@@ -37,6 +39,14 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<MdcounterConfig>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDCounterConfig_CreatedBy");
+            entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_MDCounterConfig_IsActive");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDCounterConfig_UpdatedBy");
+        });
+
         modelBuilder.Entity<Mdparking>(entity =>
         {
             entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDParking__Activ__3B75D760");
