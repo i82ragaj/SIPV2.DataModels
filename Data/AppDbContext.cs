@@ -27,9 +27,9 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TrprocessError> TrprocessErrors { get; set; }
 
-    public virtual DbSet<VoccupationActual> VoccupationActuals { get; set; }
+    public virtual DbSet<VlastParkingDatum> VlastParkingData { get; set; }
 
-    public virtual DbSet<VparkingDatum> VparkingData { get; set; }
+    public virtual DbSet<VoccupationActual> VoccupationActuals { get; set; }
 
     public virtual DbSet<VparkingSummary> VparkingSummaries { get; set; }
 
@@ -109,14 +109,14 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_TRProcessError_UpdatedBy");
         });
 
+        modelBuilder.Entity<VlastParkingDatum>(entity =>
+        {
+            entity.ToView("VLastParkingData");
+        });
+
         modelBuilder.Entity<VoccupationActual>(entity =>
         {
             entity.ToView("VOccupationActual");
-        });
-
-        modelBuilder.Entity<VparkingDatum>(entity =>
-        {
-            entity.ToView("VParkingData");
         });
 
         modelBuilder.Entity<VparkingSummary>(entity =>

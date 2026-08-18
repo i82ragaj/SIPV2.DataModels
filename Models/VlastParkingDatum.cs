@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace SIPV2.DataModels;
 
 [Keyless]
-public partial class VparkingDatum
+public partial class VlastParkingDatum
 {
     [Column("ID")]
     [StringLength(10)]
@@ -15,13 +15,13 @@ public partial class VparkingDatum
     public string Id { get; set; } = null!;
 
     [StringLength(100)]
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? LastCountTotals { get; set; }
 
-    [StringLength(100)]
-    public string? LastCountTotalsStatus { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime? LastCountTotalsStatus { get; set; }
 
     public int? DailyTrans { get; set; }
 
