@@ -46,4 +46,8 @@ public partial class MdcounterConfig
     [StringLength(10)]
     [Unicode(false)]
     public string? CounterType { get; set; }
+
+    [ForeignKey("Idpk")]
+    [InverseProperty("MdcounterConfigs")]
+    public virtual Mdparking IdpkNavigation { get; set; } = null!;
 }

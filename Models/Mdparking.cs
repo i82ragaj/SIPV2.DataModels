@@ -79,5 +79,15 @@ public partial class Mdparking
     public string? Frecuency { get; set; }
 
     [InverseProperty("IdpkNavigation")]
+    public virtual ICollection<MdcounterConfig> MdcounterConfigs { get; set; } = new List<MdcounterConfig>();
+
+    [InverseProperty("IdNavigation")]
+    public virtual MdparkingStatus? MdparkingStatus { get; set; }
+
+    [InverseProperty("IdpkNavigation")]
     public virtual ICollection<TrimportProcess> TrimportProcesses { get; set; } = new List<TrimportProcess>();
+
+    [ForeignKey("Type")]
+    [InverseProperty("Mdparkings")]
+    public virtual MdparkingType TypeNavigation { get; set; } = null!;
 }

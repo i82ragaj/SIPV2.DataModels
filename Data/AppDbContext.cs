@@ -17,6 +17,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<MdparkingStatus> MdparkingStatuses { get; set; }
 
+    public virtual DbSet<MdparkingType> MdparkingTypes { get; set; }
+
     public virtual DbSet<Mdrol> Mdrols { get; set; }
 
     public virtual DbSet<Mduser> Mdusers { get; set; }
@@ -26,6 +28,8 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<TrimportProcess> TrimportProcesses { get; set; }
 
     public virtual DbSet<TrprocessError> TrprocessErrors { get; set; }
+
+    public virtual DbSet<VdailyTotal> VdailyTotals { get; set; }
 
     public virtual DbSet<VlastParkingDatum> VlastParkingData { get; set; }
 
@@ -45,6 +49,10 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDCounterConfig_CreatedBy");
             entity.Property(e => e.IsActive).HasDefaultValue(true, "DF_MDCounterConfig_IsActive");
             entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDCounterConfig_UpdatedBy");
+
+            entity.HasOne(d => d.IdpkNavigation).WithMany(p => p.MdcounterConfigs)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_MDCounterConfig_MDParking");
         });
 
         modelBuilder.Entity<Mdparking>(entity =>
@@ -54,6 +62,10 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Frecuency).HasDefaultValue("N", "DF__MDParking__Frecu__3C69FB99");
             entity.Property(e => e.Sii).HasDefaultValue(false, "DF__MDParking__SII__3A81B327");
             entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDParking_UpdatedBy");
+
+            entity.HasOne(d => d.TypeNavigation).WithMany(p => p.Mdparkings)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_MDParking_MDParkingType");
         });
 
         modelBuilder.Entity<MdparkingStatus>(entity =>
@@ -61,6 +73,17 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Active).HasDefaultValue(true, "DF_MDParkingStatus_Active");
             entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDParkingStatus_CreatedBy");
             entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDParkingStatus_UpdatedBy");
+
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.MdparkingStatus)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_MDParkingStatus_MDParking");
+        });
+
+        modelBuilder.Entity<MdparkingType>(entity =>
+        {
+            entity.Property(e => e.Active).HasDefaultValue(true, "DF__MDParkingType__active__3F466844");
+            entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_MDParkingType_CreatedBy");
+            entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_MDParkingType_UpdatedBy");
         });
 
         modelBuilder.Entity<Mdrol>(entity =>
@@ -107,6 +130,11 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Active).HasDefaultValue(true, "DF_TRProcessError_Active");
             entity.Property(e => e.CreatedBy).HasDefaultValue("system", "DF_TRProcessError_CreatedBy");
             entity.Property(e => e.UpdatedBy).HasDefaultValue("system", "DF_TRProcessError_UpdatedBy");
+        });
+
+        modelBuilder.Entity<VdailyTotal>(entity =>
+        {
+            entity.ToView("VDailyTotal");
         });
 
         modelBuilder.Entity<VlastParkingDatum>(entity =>

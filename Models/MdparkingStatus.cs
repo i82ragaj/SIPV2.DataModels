@@ -47,4 +47,8 @@ public partial class MdparkingStatus
 
     [Column(TypeName = "datetime")]
     public DateTime? LastImportedDuration { get; set; }
+
+    [ForeignKey("Id")]
+    [InverseProperty("MdparkingStatus")]
+    public virtual Mdparking IdNavigation { get; set; } = null!;
 }
