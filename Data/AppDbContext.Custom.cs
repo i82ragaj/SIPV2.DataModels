@@ -11,9 +11,12 @@ public partial class AppDbContext
     {
         modelBuilder.Entity<MdparkingStatus>(entity =>
         {
-            // Clave compartida (no hay FK real en la base de datos): el Id de
-            // MDParkingStatus es también el de MDParking al que pertenece.
-            entity.HasOne(s => s.Parking).WithOne(p => p.ParkingStatus).HasForeignKey<MdparkingStatus>(s => s.Id);
+            // Relación 1:1 por clave compartida (ahora con FK real en la base de datos,
+            // FK_MDParkingStatus_MDParking): el scaffold ya configura HasOne/WithOne en
+            // AppDbContext.cs, pero no puede inferir por sí solo qué lado es el
+            // dependiente, así que lo completamos aquí con HasForeignKey explícito
+            // (si no, EF lanza "The dependent side could not be determined...").
+            entity.HasOne(s => s.IdNavigation).WithOne(p => p.MdparkingStatus).HasForeignKey<MdparkingStatus>(s => s.Id);
         });
     }
 }
